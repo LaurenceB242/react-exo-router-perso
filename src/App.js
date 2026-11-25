@@ -1,18 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-import { Link } from 'react-router';
+import { NavLink, Outlet } from 'react-router';
+
+const lienClasse = ({ isActive }) => (isActive ? 'actif' : undefined);
 
 function App() {
   return (
     <>
-      <h1>Home Page</h1>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/familles">Toute les familles</Link></li>
-        <li><Link to="/famille/Moldu">Type de Famille</Link></li>
-        <li><Link to="/perso/Hermione">Personnages nom</Link></li>
-        <li><Link to="/personnages/Ron">Les Personnages</Link></li>
-      </ul>
+      <header className="entete">
+        <NavLink to="/" className="marque">Registre de Poudlard</NavLink>
+        <nav aria-label="Navigation principale">
+          <NavLink to="/familles" className={lienClasse}>Familles</NavLink>
+          <NavLink to="/personnages" className={lienClasse}>Personnages</NavLink>
+        </nav>
+      </header>
+      <main className="page">
+        <Outlet />
+      </main>
     </>
   );
 }

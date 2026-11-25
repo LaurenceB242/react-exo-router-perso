@@ -4,35 +4,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router';
+import Accueil from './components/Accueil';
 import Familles from './components/Familles';
 import Famille from './components/Famille';
-import ErrorPage from './components/ErrorPage';
-import Perso from './components/Perso';
 import Personnages from './components/Personnages';
+import Perso from './components/Perso';
+import ErrorPage from './components/ErrorPage';
 
 const router = createBrowserRouter([
- {
-    path: "/",
+  {
+    path: '/',
     element: <App />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <Accueil /> },
+      { path: 'familles', element: <Familles /> },
+      { path: 'familles/:type', element: <Famille /> },
+      { path: 'personnages', element: <Personnages /> },
+      { path: 'personnages/:id', element: <Perso /> },
+      { path: '*', element: <ErrorPage /> },
+    ],
   },
-  {
-    path: '/familles/',
-    element : <Familles/>
-  },
-  {
-    path: '/famille/:type',
-    element: <Famille/>
-  },
-  {
-    path: '/perso/:type',
-    element: <Perso/>
-  },
-     {
-    path: '/personnages/:type',
-    element: <Personnages/>
-  },
-])
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -41,7 +34,5 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
